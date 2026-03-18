@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Beki – Assamese Kitchen & Boutique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --cream:#fdf6ec;--warm:#f5e6cc;--earth:#8b5e3c;--deep:#4a2e14;
+    --gold:#c8923a;--red:#c0392b;--text:#2d1e0f;--muted:#7a6555;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);line-height:1.7}
+  nav{position:fixed;top:0;width:100%;background:rgba(253,246,236,0.96);backdrop-filter:blur(4px);z-index:999;border-bottom:1px solid #ddc89a;padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+  nav ul{list-style:none;display:flex;gap:2rem}
+  nav ul a{text-decoration:none;color:var(--muted);font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s}
+  nav ul a:hover{color:var(--earth)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--deep)}
+  #home{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,#fdf6ec 0%,#f5e6cc 60%,#e8d0a8 100%);position:relative;overflow:hidden;padding:6rem 2rem 4rem}
+  .hero-pattern{position:absolute;inset:0;opacity:0.06;background-image:repeating-linear-gradient(45deg,var(--earth) 0,var(--earth) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+  .hero-content{position:relative;max-width:720px}
+  .hero-badge{display:inline-block;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:6px 18px;border-radius:2px;margin-bottom:1.5rem}
+  .hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);color:var(--deep);line-height:1.15;margin-bottom:1rem}
+  .hero-content h1 em{color:var(--earth);font-style:italic}
+  .tagline{font-size:1.25rem;color:var(--earth);font-family:'Playfair Display',serif;letter-spacing:2px;margin-bottom:0.75rem;font-style:italic}
+  .hero-sub{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;font-weight:300}
+  .btn{display:inline-block;padding:14px 36px;background:var(--earth);color:#fff;text-decoration:none;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;border-radius:2px;transition:background 0.3s,transform 0.2s}
+  .btn:hover{background:var(--deep);transform:translateY(-2px)}
+  .btn-outline{background:transparent;border:1.5px solid var(--earth);color:var(--earth);margin-left:1rem}
+  .btn-outline:hover{background:var(--earth);color:#fff}
+  .hero-deco{margin-top:4rem;display:flex;justify-content:center;gap:2rem;opacity:0.4}
+  .hero-deco span{font-size:2rem}
+  section{padding:5rem 2rem}
+  .section-inner{max-width:1100px;margin:auto}
+  .section-label{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--deep);margin-bottom:1rem}
+  .section-sub{color:var(--muted);font-weight:300;max-width:560px;margin-bottom:3rem}
+  .divider{width:48px;height:3px;background:var(--gold);margin:1rem 0 2rem}
+  #about{background:#fff}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .about-visual{background:var(--warm);border-radius:4px;aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;border:2px dashed #ddc89a;padding:2rem;text-align:center}
+  .about-visual .icon{font-size:4rem;opacity:0.5}
+  .about-visual p{font-size:0.85rem;color:var(--muted);letter-spacing:1px}
+  .about-text p{color:var(--muted);margin-bottom:1rem;font-weight:300}
+  .values{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+  .val-card{background:var(--warm);padding:1rem 1.2rem;border-radius:2px;border-left:3px solid var(--gold)}
+  .val-card h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--deep);margin-bottom:4px}
+  .val-card p{font-size:0.85rem;color:var(--muted);margin:0}
+  #boutique{background:var(--cream)}
+  .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+  .shop-card{background:#fff;border-radius:4px;overflow:hidden;border:1px solid #e5d5bc;transition:transform 0.3s,box-shadow 0.3s}
+  .shop-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(74,46,20,0.12)}
+  .card-img{height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;font-size:3rem;background:var(--warm)}
+  .card-img p{font-size:0.78rem;letter-spacing:1px;color:var(--muted)}
+  .card-body{padding:1.2rem 1.4rem}
+  .card-tag{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem}
+  .card-body h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--deep);margin-bottom:0.4rem}
+  .card-body p{font-size:0.88rem;color:var(--muted);font-weight:300}
+  .card-footer{display:flex;justify-content:space-between;align-items:center;padding:0 1.4rem 1.2rem}
+  .price{font-family:'Playfair Display',serif;color:var(--earth);font-size:1.1rem}
+  .add-btn{background:var(--earth);color:#fff;border:none;padding:8px 18px;font-size:0.78rem;letter-spacing:1px;border-radius:2px;cursor:pointer;transition:background 0.3s}
+  .add-btn:hover{background:var(--deep)}
+  #gallery{background:#fff}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .g-item{background:var(--warm);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;border:1px solid #e5d5bc;transition:transform 0.3s;padding:2rem 1rem}
+  .g-item:hover{transform:scale(1.02)}
+  .g-item:first-child{grid-column:span 2;aspect-ratio:16/9}
+  .g-item{aspect-ratio:4/3}
+  .g-icon{font-size:2.5rem;opacity:0.45}
+  .g-label{font-size:0.78rem;letter-spacing:1px;color:var(--muted)}
+  .gallery-note{margin-top:1.5rem;text-align:center;color:var(--muted);font-size:0.85rem;font-style:italic}
+  #contact{background:var(--cream)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+  .contact-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep);margin-bottom:1rem}
+  .info-row{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start}
+  .info-icon{width:36px;height:36px;background:var(--warm);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;border:1px solid #ddc89a}
+  .info-row h4{font-size:0.85rem;font-weight:700;color:var(--deep);margin-bottom:2px}
+  .info-row p{font-size:0.85rem;color:var(--muted);font-weight:300}
+  .contact-form{background:#fff;padding:2rem;border-radius:4px;border:1px solid #e5d5bc}
+  .form-group{margin-bottom:1.2rem}
+  .form-group label{display:block;font-size:0.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--earth);margin-bottom:6px}
+  .form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 14px;border:1px solid #ddc89a;border-radius:2px;background:var(--cream);color:var(--text);font-family:'Lato',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.3s}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--earth)}
+  .form-group textarea{resize:vertical;min-height:100px}
+  .submit-btn{width:100%;padding:14px;background:var(--earth);color:#fff;border:none;font-family:'Lato',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background 0.3s}
+  .submit-btn:hover{background:var(--deep)}
+  .success-msg{display:none;background:#f0f7ec;border:1px solid #7a8c6e;color:#3a5a2a;padding:1rem;border-radius:2px;text-align:center;font-size:0.9rem;margin-top:1rem}
+  footer{background:var(--deep);color:#c8b89a;text-align:center;padding:2.5rem 2rem}
+  footer p{font-size:0.82rem;font-weight:300;margin-bottom:0.3rem}
+  .foot-links{display:flex;justify-content:center;gap:1.5rem;margin:1rem 0;flex-wrap:wrap}
+  .foot-links a{color:#c8b89a;text-decoration:none;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s}
+  .foot-links a:hover{color:var(--gold)}
+  @media(max-width:768px){
+    .hamburger{display:flex}
+    nav ul{display:none;position:absolute;top:68px;left:0;right:0;background:var(--cream);flex-direction:column;padding:1rem 2rem;gap:1rem;border-bottom:1px solid #ddc89a}
+    nav ul.open{display:flex}
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)}
+    .g-item:first-child{grid-column:span 2}
+    .values{grid-template-columns:1fr}
+    .btn-outline{margin:1rem 0 0 0;display:block}
+  }
+</style>
+</head>
+<body>
+
+<!-- INLINE LOGO SVG — reused in nav + footer via <use> -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="beki-logo" viewBox="0 0 260 110">
+      <!-- BEKI -->
+      <text x="130" y="58" font-family="'Playfair Display',Georgia,serif" font-size="62" font-weight="600" fill="#5c2d0e" text-anchor="middle" letter-spacing="8">BEKI</text>
+      <!-- top red line -->
+      <line x1="20" y1="66" x2="240" y2="66" stroke="#c0392b" stroke-width="1.5"/>
+      <!-- motif row: alternating cross-flowers and small diamonds -->
+      <g fill="#c0392b">
+        <!-- pattern unit repeated: cross at x, dot at x+11 -->
+        <!-- cross flower = 4 rects rotated -->
+        <g id="cf"><rect x="-3" y="-1" width="6" height="2" rx="1"/><rect x="-1" y="-3" width="2" height="6" rx="1"/><rect x="-2.8" y="-2.8" width="2" height="5.6" rx="1" transform="rotate(45)"/><rect x="-2.8" y="-2.8" width="2" height="5.6" rx="1" transform="rotate(-45)"/></g>
+        <use href="#cf" transform="translate(30,78)"/>
+        <use href="#cf" transform="translate(52,78)"/>
+        <use href="#cf" transform="translate(74,78)"/>
+        <use href="#cf" transform="translate(96,78)"/>
+        <use href="#cf" transform="translate(118,78)"/>
+        <use href="#cf" transform="translate(140,78)"/>
+        <use href="#cf" transform="translate(162,78)"/>
+        <use href="#cf" transform="translate(184,78)"/>
+        <use href="#cf" transform="translate(206,78)"/>
+        <use href="#cf" transform="translate(228,78)"/>
+        <!-- small dots between crosses -->
+        <rect x="38" y="76" width="5" height="5" rx="0.5" transform="rotate(45 40.5 78.5)"/>
+        <rect x="60" y="76" width="5" height="5" rx="0.5" transform="rotate(45 62.5 78.5)"/>
+        <rect x="82" y="76" width="5" height="5" rx="0.5" transform="rotate(45 84.5 78.5)"/>
+        <rect x="104" y="76" width="5" height="5" rx="0.5" transform="rotate(45 106.5 78.5)"/>
+        <rect x="126" y="76" width="5" height="5" rx="0.5" transform="rotate(45 128.5 78.5)"/>
+        <rect x="148" y="76" width="5" height="5" rx="0.5" transform="rotate(45 150.5 78.5)"/>
+        <rect x="170" y="76" width="5" height="5" rx="0.5" transform="rotate(45 172.5 78.5)"/>
+        <rect x="192" y="76" width="5" height="5" rx="0.5" transform="rotate(45 194.5 78.5)"/>
+        <rect x="214" y="76" width="5" height="5" rx="0.5" transform="rotate(45 216.5 78.5)"/>
+      </g>
+      <!-- bottom red line -->
+      <line x1="20" y1="86" x2="240" y2="86" stroke="#c0392b" stroke-width="1.5"/>
+      <!-- tagline -->
+      <text x="130" y="101" font-family="'Playfair Display',Georgia,serif" font-size="11" fill="#c8923a" text-anchor="middle" letter-spacing="1.5" font-style="italic">Cultured. Crafted. Curated.</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- FOOTER LOGO (light version for dark background) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="beki-logo-light" viewBox="0 0 260 110">
+      <text x="130" y="58" font-family="'Playfair Display',Georgia,serif" font-size="62" font-weight="600" fill="#fdf6ec" text-anchor="middle" letter-spacing="8">BEKI</text>
+      <line x1="20" y1="66" x2="240" y2="66" stroke="#c8923a" stroke-width="1.5"/>
+      <g fill="#f5e6cc">
+        <g id="cfl"><rect x="-3" y="-1" width="6" height="2" rx="1"/><rect x="-1" y="-3" width="2" height="6" rx="1"/><rect x="-2.8" y="-2.8" width="2" height="5.6" rx="1" transform="rotate(45)"/><rect x="-2.8" y="-2.8" width="2" height="5.6" rx="1" transform="rotate(-45)"/></g>
+        <use href="#cfl" transform="translate(30,78)"/>
+        <use href="#cfl" transform="translate(52,78)"/>
+        <use href="#cfl" transform="translate(74,78)"/>
+        <use href="#cfl" transform="translate(96,78)"/>
+        <use href="#cfl" transform="translate(118,78)"/>
+        <use href="#cfl" transform="translate(140,78)"/>
+        <use href="#cfl" transform="translate(162,78)"/>
+        <use href="#cfl" transform="translate(184,78)"/>
+        <use href="#cfl" transform="translate(206,78)"/>
+        <use href="#cfl" transform="translate(228,78)"/>
+        <rect x="38"  y="76" width="5" height="5" rx="0.5" transform="rotate(45 40.5 78.5)"/>
+        <rect x="60"  y="76" width="5" height="5" rx="0.5" transform="rotate(45 62.5 78.5)"/>
+        <rect x="82"  y="76" width="5" height="5" rx="0.5" transform="rotate(45 84.5 78.5)"/>
+        <rect x="104" y="76" width="5" height="5" rx="0.5" transform="rotate(45 106.5 78.5)"/>
+        <rect x="126" y="76" width="5" height="5" rx="0.5" transform="rotate(45 128.5 78.5)"/>
+        <rect x="148" y="76" width="5" height="5" rx="0.5" transform="rotate(45 150.5 78.5)"/>
+        <rect x="170" y="76" width="5" height="5" rx="0.5" transform="rotate(45 172.5 78.5)"/>
+        <rect x="192" y="76" width="5" height="5" rx="0.5" transform="rotate(45 194.5 78.5)"/>
+        <rect x="214" y="76" width="5" height="5" rx="0.5" transform="rotate(45 216.5 78.5)"/>
+      </g>
+      <line x1="20" y1="86" x2="240" y2="86" stroke="#c8923a" stroke-width="1.5"/>
+      <text x="130" y="101" font-family="'Playfair Display',Georgia,serif" font-size="11" fill="#c8923a" text-anchor="middle" letter-spacing="1.5" font-style="italic">Cultured. Crafted. Curated.</text>
+    </symbol>
+  </defs>
+</svg>
+<nav>
+  <div class="nav-inner">
+    <svg width="120" height="55" viewBox="0 0 260 110"><use href="#beki-logo"/></svg>
+    <ul id="navMenu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#boutique">Boutique</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <h1>From Our Homeland,<br><em>To Your Heart.</em></h1>
+    <p class="tagline">Cultured. Crafted. Curated.</p>
+    <p class="hero-sub">Authentic Assamese cuisine, handpicked Mekhela Sador, and traditional Kaahor utensils — all in one soulful space.</p>
+    <a href="#boutique" class="btn">Explore Boutique</a>
+    <a href="#contact" class="btn btn-outline">Reserve a Table</a>
+    <div class="hero-deco"><span>🌿</span><span>🏺</span><span>🌾</span><span>🍃</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="icon">🏔️</div>
+        <p>Your photo here<br><small style="opacity:0.7">(upload your restaurant / team photo)</small></p>
+      </div>
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">Born from the Banks of the Brahmaputra</h2>
+        <div class="divider"></div>
+        <p>Beki is named after the gentle river that winds through the Brahmaputra valley — a symbol of life, flow, and deep cultural roots. We are an Assamese kitchen and boutique dedicated to sharing the warmth of our land with the world.</p>
+        <p>Our restaurant serves traditional Assamese recipes passed down through generations — slow-cooked, thoughtfully spiced, and served with love. Our boutique celebrates the artisans of Assam through hand-woven Mekhela Sadors and authentic Kaahor (bell metal) utensils.</p>
+        <p>Every dish, every fabric, every utensil here carries a story from the Northeast.</p>
+        <div class="values">
+          <div class="val-card"><h4>Authentic Recipes</h4><p>Traditional Assamese cooking, no shortcuts</p></div>
+          <div class="val-card"><h4>Handwoven Mekhela</h4><p>Directly from Assamese weavers</p></div>
+          <div class="val-card"><h4>Kaahor Utensils</h4><p>Heritage bell metal craftsmanship</p></div>
+          <div class="val-card"><h4>Artisan First</h4><p>Supporting local artisans & farmers</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUTIQUE -->
+<section id="boutique">
+  <div class="section-inner">
+    <span class="section-label">Our Collection</span>
+    <h2 class="section-title">The Beki Boutique</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Handwoven Mekhela Sadors, traditional Kaahor utensils, and artisanal gifts — each piece crafted with soul.</p>
+    <div class="shop-grid">
+      <div class="shop-card">
+        <div class="card-img">🧵<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Mekhela Sador</div><h3>Muga Silk Mekhela</h3><p>Golden Muga silk, hand-woven by artisans of Sualkuchi with traditional motifs.</p></div>
+        <div class="card-footer"><span class="price">₹4,500</span><button class="add-btn" onclick="enquire('Muga Silk Mekhela')">Enquire</button></div>
+      </div>
+      <div class="shop-card">
+        <div class="card-img">🏺<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Kaahor Utensils</div><h3>Traditional Bell Metal Set</h3><p>A set of traditional Kaahor bowls and plates used in Assamese households for generations.</p></div>
+        <div class="card-footer"><span class="price">₹2,800</span><button class="add-btn" onclick="enquire('Traditional Bell Metal Set')">Enquire</button></div>
+      </div>
+      <div class="shop-card">
+        <div class="card-img">🌸<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Mekhela Sador</div><h3>Pat Silk Sador</h3><p>Lustrous Pat silk with intricate Assamese floral border — perfect for festivals.</p></div>
+        <div class="card-footer"><span class="price">₹3,200</span><button class="add-btn" onclick="enquire('Pat Silk Sador')">Enquire</button></div>
+      </div>
+      <div class="shop-card">
+        <div class="card-img">🫙<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Artisan Gifts</div><h3>Kaahor Sarai Set</h3><p>A ceremonial Sarai stand in polished bell metal — a timeless gift of Assamese heritage.</p></div>
+        <div class="card-footer"><span class="price">₹5,500</span><button class="add-btn" onclick="enquire('Kaahor Sarai Set')">Enquire</button></div>
+      </div>
+      <div class="shop-card">
+        <div class="card-img">🌿<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Mekhela Sador</div><h3>Cotton Mekhela – Daily Wear</h3><p>Lightweight handloom cotton Mekhela — comfortable and elegant for everyday wear.</p></div>
+        <div class="card-footer"><span class="price">₹1,200</span><button class="add-btn" onclick="enquire('Cotton Mekhela Daily Wear')">Enquire</button></div>
+      </div>
+      <div class="shop-card">
+        <div class="card-img">🥣<p>Your product photo</p></div>
+        <div class="card-body"><div class="card-tag">Kaahor Utensils</div><h3>Kaahor Bati Collection</h3><p>A set of 6 handcrafted bell metal bowls — for dining, offering, or display.</p></div>
+        <div class="card-footer"><span class="price">₹1,800</span><button class="add-btn" onclick="enquire('Kaahor Bati Collection')">Enquire</button></div>
+      </div>
+    </div>
+    <p style="margin-top:2rem;text-align:center;color:var(--muted);font-size:0.88rem">All products are handcrafted by Assamese artisans. Custom orders & bulk enquiries welcome — <a href="#contact" style="color:var(--earth)">contact us</a>.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-label">Our Space & Craft</span>
+    <h2 class="section-title">A Glimpse of Beki</h2>
+    <div class="divider"></div>
+    <p class="section-sub">From the kitchen to the loom — moments from our restaurant and boutique.</p>
+    <div class="gallery-grid">
+      <div class="g-item"><div class="g-icon">🍽️</div><div class="g-label">Restaurant Interior</div></div>
+      <div class="g-item"><div class="g-icon">🌾</div><div class="g-label">Assamese Cuisine</div></div>
+      <div class="g-item"><div class="g-icon">🧵</div><div class="g-label">Mekhela Weaving</div></div>
+      <div class="g-item"><div class="g-icon">🏺</div><div class="g-label">Kaahor Craft</div></div>
+      <div class="g-item"><div class="g-icon">🌿</div><div class="g-label">Farm to Table</div></div>
+    </div>
+    <p class="gallery-note">Photos coming soon — replace placeholders with your real images in the HTML file</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label">Find Us</span>
+    <h2 class="section-title">Visit Beki</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>We'd love to have you</h3>
+        <p style="color:var(--muted);font-weight:300;margin-bottom:2rem">Whether you're joining us for a meal or browsing the boutique, you're always welcome at Beki.</p>
+        <div class="info-row"><div class="info-icon">📍</div><div><h4>Location</h4><p>Your Address Here<br>Guwahati / Assam, India</p></div></div>
+        <div class="info-row"><div class="info-icon">🕐</div><div><h4>Opening Hours</h4><p>Tue–Sun: 11:00 AM – 9:00 PM<br>Monday: Closed</p></div></div>
+        <div class="info-row"><div class="info-icon">📞</div><div><h4>Phone</h4><p>+91 XXXXX XXXXX</p></div></div>
+        <div class="info-row"><div class="info-icon">✉️</div><div><h4>Email</h4><p>hello@beki.in</p></div></div>
+      </div>
+      <div class="contact-form">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:1.2rem">Send us a message</h3>
+        <div class="form-group"><label>Your Name</label><input type="text" id="fname" placeholder="e.g. Priya Sharma"/></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="femail" placeholder="you@example.com"/></div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select id="ftype">
+            <option value="">Select…</option>
+            <option>Table Reservation</option>
+            <option>Boutique Enquiry</option>
+            <option>Wholesale / Bulk Order</option>
+            <option>Custom Mekhela Order</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="fmsg" placeholder="Tell us more…"></textarea></div>
+        <button class="submit-btn" onclick="submitForm()">Send Message</button>
+        <div class="success-msg" id="successMsg">Thank you! We'll get back to you within 24 hours. 🙏</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <svg width="160" height="72" viewBox="0 0 260 110" style="display:block;margin:0 auto 0.75rem"><use href="#beki-logo-light"/></svg>
+  <p>Assamese Kitchen & Boutique · beki.in</p>
+  <div class="foot-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#boutique">Boutique</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p style="font-size:0.78rem;opacity:0.6;margin-top:0.5rem">&copy; 2025 Beki. All rights reserved.</p>
+</footer>
+
+<script>
+function enquire(p){
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{
+    document.getElementById('ftype').value='Boutique Enquiry';
+    document.getElementById('fmsg').value='Hi, I am interested in the '+p+'. Please share more details.';
+  },600);
+}
+function submitForm(){
+  const n=document.getElementById('fname').value.trim();
+  const e=document.getElementById('femail').value.trim();
+  if(!n||!e){alert('Please fill in your name and email.');return;}
+  document.getElementById('successMsg').style.display='block';
+  document.getElementById('fname').value='';
+  document.getElementById('femail').value='';
+  document.getElementById('fmsg').value='';
+  document.getElementById('ftype').value='';
+}
+</script>
+</body>
+</html>
